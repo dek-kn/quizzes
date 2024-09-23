@@ -1,0 +1,41 @@
+<p>
+  <a href="#" (click)="cancelQuizClicked()">
+    Cancel and return to quiz list
+  </a>
+</p>
+<h3>Question {{ questionNumber }} of {{ totalQuestionCount }}</h3>
+<p>{{ questionText }}</p>
+<div>
+  @for (answer of answers; track $index) {
+    <p>
+      <label>
+        <input
+          type="radio"
+          name="answer"
+          [checked]="selectedAnswerIndex == $index"
+          (change)="answerSelected($index)" />
+        {{ answer }}
+      </label>
+    </p>
+  }
+</div>
+<p>
+  <button
+    [disabled]="!isPreviousQuestionAvailable"
+    (click)="isPreviousQuestionAvailable ? previousQuestionClicked() : null">
+    Previous question
+  </button>
+  @if (isLastQuestion) {
+    <button
+      [disabled]="isNextButtonDisabled"
+      (click)="isNextButtonDisabled ? null : finishQuizClicked()">
+      Finish quiz
+    </button>
+  } @else {
+    <button
+      [disabled]="isNextButtonDisabled"
+      (click)="isNextButtonDisabled ? null : nextQuestionClicked()">
+      Next question
+    </button>
+  }
+</p>

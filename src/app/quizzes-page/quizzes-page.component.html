@@ -1,0 +1,22 @@
+<h3>Quizzes</h3>
+@if (showRandomQuizButton) {
+	<p>
+		<button mat-stroked-button (click)="randomQuiz()">I'm lucky</button>
+	</p>
+}
+@if (quizzesLoaded) {
+	@for (quiz of quizzes; track quiz.id) {
+		<mat-card appearance="outlined">
+			<mat-card-header>
+				<mat-card-title>{{ quiz.title }}</mat-card-title>
+				<mat-card-subtitle>{{ quiz.numQuestions }} questions</mat-card-subtitle>
+			</mat-card-header>
+			<mat-card-actions>
+				<button mat-stroked-button (click)="startQuiz(quiz.id)">Start quiz</button>
+			</mat-card-actions>
+		</mat-card>
+	}
+} @else {
+	<p>Loading quizzes...</p>
+	<p>This may take about one minute because Open Trivia Database API can be accessed only once in 5 seconds.</p>
+}
